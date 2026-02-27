@@ -1,5 +1,6 @@
 ﻿using LibraryLending.Domain.Aggregates.Members.ValueObjects.MemberNumbers;
 using LibraryLending.Domain.Shared.ValueObjects.FullNames;
+using LibraryLending.SharedKernel.Results;
 
 namespace LibraryLending.Domain.Aggregates.Members;
 
@@ -13,15 +14,20 @@ public sealed class Member
     private Member(Guid id, MemberNumber memberNumber, FullName fullName, bool isActive) =>
         (Id, MemberNumber, FullName, IsActive) = (id, memberNumber, fullName, isActive);
 
-    public static Member Create(string memberNumber, string firstName, string lastName)
+    public static Result<Member> Create(string memberNumber, string firstName, string lastName)
     {
-        var fullName = FullName.Create(firstName, lastName);
-        var memberNum = MemberNumber.Create(memberNumber);
+        var fullNameResult = FullName.Create(firstName, lastName);
+        if (fullNameResult.IsFailure)
+            return fullNameResult.Error;
 
-        return new(
+        var memberNumberResult = MemberNumber.Create(memberNumber);
+        if (memberNumberResult.IsFailure)
+            return memberNumberResult.Error;
+
+        return new Member(
             id: Guid.NewGuid(),
-            memberNumber: memberNum,
-            fullName: fullName,
+            memberNumber: memberNumberResult.Value,
+            fullName: fullNameResult.Value,
             isActive: true
         );
     }
