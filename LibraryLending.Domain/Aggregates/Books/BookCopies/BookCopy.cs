@@ -28,7 +28,7 @@ public sealed class BookCopy
     internal static BookCopy Rehydrate(BookCopyId id, Guid bookId, string barcode, CopyStatus status) =>
     new(id, bookId, CopyBarcode.Rehydrate(barcode), status);
 
-    public Result MarkOnLoan()
+    internal Result MarkOnLoan()
     {
         if (Status != CopyStatus.Available)
             return BookCopyErrors.NotAvailable;

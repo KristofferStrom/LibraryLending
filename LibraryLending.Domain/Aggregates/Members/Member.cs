@@ -1,4 +1,5 @@
-﻿using LibraryLending.Domain.Aggregates.Members.MemberNumbers;
+﻿using LibraryLending.Domain.Aggregates.Books.BookCopies;
+using LibraryLending.Domain.Aggregates.Members.MemberNumbers;
 using LibraryLending.Domain.Shared.ValueObjects.FullNames;
 using LibraryLending.SharedKernel.Results;
 
@@ -33,10 +34,13 @@ public sealed class Member
     }
 
     internal static Member Rehydrate(MemberId id, string memberNumber, string firstName, string lastName, bool isActive) =>
-        new(
-            id,
-            MemberNumber.Rehydrate(memberNumber),
-            FullName.Rehydrate(firstName, lastName),
-            isActive
-        );
+        new(id, MemberNumber.Rehydrate(memberNumber), FullName.Rehydrate(firstName, lastName), isActive);
+
+    public Result Borrow(BookCopy copy)
+    {
+        if (!IsActive)
+            return MemberErrors.Inactive;
+
+        return copy.MarkOnLoan();
+    }
 }
