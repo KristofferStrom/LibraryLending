@@ -1,4 +1,6 @@
-﻿namespace LibraryLending.Domain.Shared.ValueObjects.FullNames;
+﻿using LibraryLending.SharedKernel.Results;
+
+namespace LibraryLending.Domain.Shared.ValueObjects.FullNames;
 
 public sealed record FullName
 {
@@ -13,18 +15,21 @@ public sealed record FullName
         LastName = lastName;
     }
 
-    public static FullName Create(string firstName, string lastName)
+    public static Result<FullName> Create(string firstName, string lastName)
     {
         if (string.IsNullOrWhiteSpace(firstName))
-            throw new ArgumentException(FullNameErrors.FirstNameEmpty);
-        if (firstName.Length > NameMaxLength)
-            throw new ArgumentException(FullNameErrors.FirstNameTooLong(NameMaxLength));
-        if (string.IsNullOrWhiteSpace(lastName))
-            throw new ArgumentException(FullNameErrors.LastNameEmpty);
-        if (lastName.Length > NameMaxLength)
-            throw new ArgumentException(FullNameErrors.LastNameTooLong(NameMaxLength));
+            return FullNameErrors.FirstNameEmpty;
 
-        return new(firstName.Trim(), lastName.Trim());
+        if (firstName.Length > NameMaxLength)
+            return FullNameErrors.FirstNameTooLong(NameMaxLength);
+
+        if (string.IsNullOrWhiteSpace(lastName))
+            return FullNameErrors.LastNameEmpty;
+
+        if (lastName.Length > NameMaxLength)
+            return FullNameErrors.LastNameTooLong(NameMaxLength);
+
+        return new FullName(firstName.Trim(), lastName.Trim());
     }
 
     internal static FullName Rehydrate(string firstName, string lastName)
