@@ -1,6 +1,6 @@
 ﻿using LibraryLending.SharedKernel.Results;
 
-namespace LibraryLending.Domain.Aggregates.Members.ValueObjects.MemberNumbers;
+namespace LibraryLending.Domain.Aggregates.Members.MemberNumbers;
 
 public sealed record MemberNumber
 {

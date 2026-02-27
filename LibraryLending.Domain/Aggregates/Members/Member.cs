@@ -1,4 +1,4 @@
-﻿using LibraryLending.Domain.Aggregates.Members.ValueObjects.MemberNumbers;
+﻿using LibraryLending.Domain.Aggregates.Members.MemberNumbers;
 using LibraryLending.Domain.Shared.ValueObjects.FullNames;
 using LibraryLending.SharedKernel.Results;
 

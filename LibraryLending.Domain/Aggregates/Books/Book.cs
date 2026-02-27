@@ -1,4 +1,4 @@
-﻿using LibraryLending.Domain.Aggregates.Books.ValueObjects.Isbns;
+﻿using LibraryLending.Domain.Aggregates.Books.Isbns;
 using LibraryLending.SharedKernel.Results;
 
 namespace LibraryLending.Domain.Aggregates.Books;
