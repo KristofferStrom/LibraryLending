@@ -2,4 +2,11 @@
   <Folder Name="/Solution Items/">
     <File Path="README.md" />
   </Folder>
+  <Folder Name="/src/">
+    <Project Path="LibraryLending.Api/LibraryLending.Api.csproj" />
+    <Project Path="LibraryLending.Application/LibraryLending.Application.csproj" />
+    <Project Path="LibraryLending.Domain/LibraryLending.Domain.csproj" />
+    <Project Path="LibraryLending.Infrastructure/LibraryLending.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/Tests/" />
 </Solution>
