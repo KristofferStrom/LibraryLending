@@ -9,4 +9,5 @@
     <Project Path="LibraryLending.Infrastructure/LibraryLending.Infrastructure.csproj" />
   </Folder>
   <Folder Name="/Tests/" />
+  <Project Path="LibraryLending.SharedKernel/LibraryLending.SharedKernel.csproj" Id="50c0a618-32d8-411e-9216-ac549f7e3875" />
 </Solution>

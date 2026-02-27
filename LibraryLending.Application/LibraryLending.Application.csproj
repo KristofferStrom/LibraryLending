@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\LibraryLending.Domain\LibraryLending.Domain.csproj" />
+    <ProjectReference Include="..\LibraryLending.SharedKernel\LibraryLending.SharedKernel.csproj" />
   </ItemGroup>
 
 </Project>
