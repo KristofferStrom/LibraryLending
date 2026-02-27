@@ -17,7 +17,7 @@ public sealed class Loan
     private Loan(LoanId id, MemberId memberId, BookCopyId bookCopyId, DateTime loanDate, DateTime dueDate, DateTime? returnedAt)
         => (Id, MemberId, BookCopyId, LoanDate, DueDate, ReturnedAt) = (id, memberId, bookCopyId, loanDate, dueDate, returnedAt);
 
-    public static Result<Loan> Create(MemberId memberId, BookCopyId bookCopyId, DateTime loanDate, DateTime dueDate)
+    internal static Result<Loan> Create(MemberId memberId, BookCopyId bookCopyId, DateTime loanDate, DateTime dueDate)
     {
         if (dueDate <= loanDate)
             return LoanErrors.InvalidDates;

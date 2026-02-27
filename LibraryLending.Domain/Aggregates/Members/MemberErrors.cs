@@ -6,4 +6,8 @@ public static class MemberErrors
 {
     public static Error Inactive =>
         new(ErrorType.Conflict, "Medlemmen är inte aktiv.");
+
+    public static Error AlreadyBorrowingSameBook =>
+    new(ErrorType.Conflict, "Medlemmen lånar redan ett exemplar av samma bok.");
+
 }
