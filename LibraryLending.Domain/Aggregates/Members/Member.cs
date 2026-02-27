@@ -37,7 +37,7 @@ public sealed class Member
     internal static Member Rehydrate(MemberId id, string memberNumber, string firstName, string lastName, bool isActive) =>
         new(id, MemberNumber.Rehydrate(memberNumber), FullName.Rehydrate(firstName, lastName), isActive);
 
-    public Result<Loan> Borrow(BookCopy copy, DateTime loanDate, DateTime dueDate, bool alreadyBorrowingSameBook)
+    public Result<Loan> Borrow(BookCopy copy, DateTime loanDate, int loanDays, bool alreadyBorrowingSameBook)
     {
         if (!IsActive) return MemberErrors.Inactive;
 
@@ -47,6 +47,7 @@ public sealed class Member
         var mark = copy.MarkOnLoan();
         if (mark.IsFailure) return mark.Error;
 
+        var dueDate = loanDate.AddDays(loanDays);
         return Loan.Create(Id, copy.Id, loanDate, dueDate);
     }
 }
