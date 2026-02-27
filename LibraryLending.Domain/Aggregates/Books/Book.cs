@@ -5,11 +5,11 @@ namespace LibraryLending.Domain.Aggregates.Books;
 
 public sealed class Book
 {
-    public Guid Id { get; }
+    public BookId Id { get; }
     public string Title { get; private set; }
     public Isbn Isbn { get; private set; }
 
-    private Book(Guid id, string title, Isbn isbn) =>
+    private Book(BookId id, string title, Isbn isbn) =>
     (Id, Title, Isbn) = (id, title, isbn);
 
     public static Result<Book> Create(string title, string isbn)
@@ -21,9 +21,9 @@ public sealed class Book
         if (isbnResult.IsFailure)
             return isbnResult.Error;
 
-        return new Book(Guid.NewGuid(), title.Trim(), isbnResult.Value);
+        return new Book(BookId.New(), title.Trim(), isbnResult.Value);
     }
 
-    internal static Book Rehydrate(Guid id, string title, string isbn) =>
+    internal static Book Rehydrate(BookId id, string title, string isbn) =>
     new(id, title, Isbn.Rehydrate(isbn));
 }

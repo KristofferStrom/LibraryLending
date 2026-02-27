@@ -5,12 +5,12 @@ using LibraryLending.SharedKernel.Results;
 
 public sealed class BookCopy
 {
-    public Guid Id { get; }
+    public BookCopyId Id { get; }
     public Guid BookId { get; private set; }
     public CopyBarcode Barcode { get; private set; }
     public CopyStatus Status { get; private set; }
 
-    private BookCopy(Guid id, Guid bookId, CopyBarcode barcode, CopyStatus status) =>
+    private BookCopy(BookCopyId id, Guid bookId, CopyBarcode barcode, CopyStatus status) =>
         (Id, BookId, Barcode, Status) = (id, bookId, barcode, status);
 
     public static Result<BookCopy> Create(Guid bookId, string barcode)
@@ -22,10 +22,10 @@ public sealed class BookCopy
         if (barcodeResult.IsFailure)
             return barcodeResult.Error;
 
-        return new BookCopy(Guid.NewGuid(), bookId, barcodeResult.Value, CopyStatus.Available);
+        return new BookCopy(BookCopyId.New(), bookId, barcodeResult.Value, CopyStatus.Available);
     }
 
-    internal static BookCopy Rehydrate(Guid id, Guid bookId, string barcode, CopyStatus status) =>
+    internal static BookCopy Rehydrate(BookCopyId id, Guid bookId, string barcode, CopyStatus status) =>
     new(id, bookId, CopyBarcode.Rehydrate(barcode), status);
 
     public Result MarkOnLoan()

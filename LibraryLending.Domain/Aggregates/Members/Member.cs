@@ -6,12 +6,12 @@ namespace LibraryLending.Domain.Aggregates.Members;
 
 public sealed class Member
 {
-    public Guid Id { get; private set; }
+    public MemberId Id { get; private set; }
     public MemberNumber MemberNumber { get; private set; } = null!;
     public FullName FullName { get; private set; } = null!;
     public bool IsActive { get; private set; }
 
-    private Member(Guid id, MemberNumber memberNumber, FullName fullName, bool isActive) =>
+    private Member(MemberId id, MemberNumber memberNumber, FullName fullName, bool isActive) =>
         (Id, MemberNumber, FullName, IsActive) = (id, memberNumber, fullName, isActive);
 
     public static Result<Member> Create(string memberNumber, string firstName, string lastName)
@@ -25,14 +25,14 @@ public sealed class Member
             return memberNumberResult.Error;
 
         return new Member(
-            id: Guid.NewGuid(),
+            id: MemberId.New(),
             memberNumber: memberNumberResult.Value,
             fullName: fullNameResult.Value,
             isActive: true
         );
     }
 
-    internal static Member Rehydrate(Guid id, string memberNumber, string firstName, string lastName, bool isActive) =>
+    internal static Member Rehydrate(MemberId id, string memberNumber, string firstName, string lastName, bool isActive) =>
         new(
             id,
             MemberNumber.Rehydrate(memberNumber),
