@@ -1,5 +1,5 @@
-using LibraryLending.Application;
-using LibraryLending.Infrastructure;
+using LibraryLending.Application.DependencyInjection;
+using LibraryLending.Infrastructure.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +10,8 @@ builder.Services
     .AddInfrastructure(builder.Configuration);
 
 var app = builder.Build();
+
+await app.Services.InitializeInfrastructureAsync();
 
 app.MapOpenApi();
 

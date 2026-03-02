@@ -3,16 +3,16 @@ using LibraryLending.Application.Core.Messaging;
 using LibraryLending.Application.Core.Pipelines.Performance;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace LibraryLending.Application;
+namespace LibraryLending.Application.DependencyInjection;
 
-public static class DependencyInjection
+public static class ServiceCollectionExtensions
 {
     public static IServiceCollection AddApplication(this IServiceCollection services)
     {
         services.AddScoped<IDispatcher, Dispatcher>();
 
         services.Scan(scan => scan
-            .FromAssemblies(typeof(DependencyInjection).Assembly)
+            .FromAssemblies(typeof(ServiceCollectionExtensions).Assembly)
 
             .AddClasses(c => c.AssignableTo(typeof(ICommandHandler<,>)))
             .AsImplementedInterfaces()

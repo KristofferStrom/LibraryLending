@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace LibraryLending.Infrastructure;
+namespace LibraryLending.Infrastructure.DependencyInjection;
 
 
 public static class ServiceCollectionExtensions
