@@ -1,6 +1,7 @@
 ﻿using LibraryLending.Application.Core.Abstractions.Messaging;
 using LibraryLending.Application.Core.Abstractions.Validations;
 using LibraryLending.Application.Core.Messaging;
+using LibraryLending.Application.Core.Pipelines.Performance.Application.Core.Pipelines.Performance;
 using LibraryLending.Application.Core.Pipelines.Validations;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -30,6 +31,7 @@ public static class DependencyInjection
 
         services.Decorate(typeof(ICommandHandler<,>), typeof(ValidationCommandDecorator<,>));
         services.Decorate(typeof(IQueryHandler<,>), typeof(ValidationQueryDecorator<,>));
+        services.Decorate(typeof(ICommandHandler<,>), typeof(SlowCommandLoggingDecorator<,>));
 
         return services;
     }
