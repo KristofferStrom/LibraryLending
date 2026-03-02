@@ -12,7 +12,7 @@ internal sealed class LendingPolicyRepository(LibraryDbContext db) : ILendingPol
 
         LendingPolicyEntity? entity = await db.LendingPolicies
             .AsNoTracking()
-            .SingleOrDefaultAsync(x => x.IsActive, ct);
+            .FirstOrDefaultAsync(x => x.IsActive, ct);
 
         if (entity is null) return null;
 
