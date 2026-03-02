@@ -12,7 +12,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Persistence\EfCore\Contexts\" />
     <Folder Include="Persistence\EfCore\Repositories\" />
   </ItemGroup>
 
