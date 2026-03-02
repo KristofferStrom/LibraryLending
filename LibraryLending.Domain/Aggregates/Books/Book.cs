@@ -5,6 +5,7 @@ namespace LibraryLending.Domain.Aggregates.Books;
 
 public sealed class Book
 {
+    public const int TitleMaxLength = 200;
     public BookId Id { get; }
     public string Title { get; private set; }
     public Isbn Isbn { get; private set; }
@@ -16,6 +17,9 @@ public sealed class Book
     {
         if (string.IsNullOrWhiteSpace(title))
             return BookErrors.TitleEmpty;
+
+        if (title.Length > TitleMaxLength)
+            return BookErrors.TitleTooLong(TitleMaxLength);
 
         var isbnResult = Isbn.Create(isbn);
         if (isbnResult.IsFailure)
