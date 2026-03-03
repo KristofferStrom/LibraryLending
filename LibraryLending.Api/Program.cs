@@ -4,24 +4,24 @@ using LibraryLending.Infrastructure.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddOpenApi();
-
 builder.Services
     .AddApplication()
-    .AddInfrastructure(builder.Configuration)
-    .AddEndpointsApiExplorer()
-    .AddEndpoints(typeof(Program).Assembly);
-//.AddSwaggerGen();
+    .AddInfrastructure(builder.Configuration);
 
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
+builder.Services.AddEndpoints(typeof(Program).Assembly);
 
 var app = builder.Build();
 
 await app.Services.InitializeInfrastructureAsync();
 
-app.MapOpenApi();
+app.UseSwagger();
+app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
 
+app.MapEndpoints();
 
 app.Run();
-
