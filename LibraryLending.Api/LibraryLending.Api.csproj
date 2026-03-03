@@ -20,7 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\Lending\BorrowBookCopy\" />
+    <Folder Include="Features\Lending\ReturnBookCopy\" />
   </ItemGroup>
 
 </Project>
