@@ -12,6 +12,7 @@
   <Folder Name="/Tests/">
     <Project Path="LibraryLending.Application.Tests/LibraryLending.Application.Tests.csproj" Id="4a753393-c17d-4db0-98b0-0e6577fa11ff" />
     <Project Path="LibraryLending.Domain.Tests/LibraryLending.Domain.Tests.csproj" Id="3aae9ca9-c54e-4e0a-a3e2-20d11f21c02c" />
+    <Project Path="LibraryLending.IntegrationTests/LibraryLending.IntegrationTests.csproj" />
     <Project Path="LibraryLending.Testing/LibraryLending.Testing.csproj" />
   </Folder>
 </Solution>
