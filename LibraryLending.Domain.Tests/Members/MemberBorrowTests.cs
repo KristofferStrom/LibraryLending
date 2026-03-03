@@ -3,30 +3,22 @@ using LibraryLending.Domain.Aggregates.Books;
 using LibraryLending.Domain.Aggregates.Books.BookCopies;
 using LibraryLending.Domain.Aggregates.Loans;
 using LibraryLending.Domain.Aggregates.Members;
-using LibraryLending.Domain.Tests.TestData;
 using LibraryLending.SharedKernel.Results;
+using LibraryLending.Testing.TestData;
 
 namespace LibraryLending.Domain.Tests.Members;
-
 
 public class MemberBorrowTests
 {
     [Fact]
     public void Borrow_WhenMemberIsInactive_ShouldReturnMemberInactiveError()
     {
-        // Arrange
-        var member = DomainBuilder.InactiveMember();
-        var copy = DomainBuilder.AvailableCopy();
+        var member = DomainFactory.InactiveMember();
+        var copy = DomainFactory.AvailableCopy();
         var loanDate = DateTime.UtcNow;
 
-        // Act
-        Result<Loan> result = member.Borrow(
-            copy,
-            loanDate,
-            loanDays: 14,
-            activeLoanBookIds: Array.Empty<BookId>());
+        Result<Loan> result = member.Borrow(copy, loanDate, 14, Array.Empty<BookId>());
 
-        // Assert
         result.IsFailure.Should().BeTrue();
         result.Error.Should().Be(MemberErrors.Inactive);
         result.Error.Type.Should().Be(ErrorType.Conflict);
@@ -35,20 +27,13 @@ public class MemberBorrowTests
     [Fact]
     public void Borrow_WhenMemberAlreadyHasSameBookActive_ShouldReturnAlreadyBorrowingSameBookError()
     {
-        // Arrange
-        var member = DomainBuilder.ActiveMember();
-        var copy = DomainBuilder.AvailableCopy(bookId: DomainBuilder.NewBookId());
+        var member = DomainFactory.ActiveMember();
+        var copy = DomainFactory.AvailableCopy(bookId: DomainFactory.NewBookId());
 
         var activeLoanBookIds = new[] { copy.BookId };
 
-        // Act
-        Result<Loan> result = member.Borrow(
-            copy,
-            loanDate: DateTime.UtcNow,
-            loanDays: 14,
-            activeLoanBookIds: activeLoanBookIds);
+        Result<Loan> result = member.Borrow(copy, DateTime.UtcNow, 14, activeLoanBookIds);
 
-        // Assert
         result.IsFailure.Should().BeTrue();
         result.Error.Should().Be(MemberErrors.AlreadyBorrowingSameBook);
         result.Error.Type.Should().Be(ErrorType.Conflict);
@@ -57,18 +42,11 @@ public class MemberBorrowTests
     [Fact]
     public void Borrow_WhenCopyCannotBeMarkedOnLoan_ShouldReturnErrorFromCopy()
     {
-        // Arrange
-        var member = DomainBuilder.ActiveMember();
-        var copy = DomainBuilder.OnLoanCopy();
+        var member = DomainFactory.ActiveMember();
+        var copy = DomainFactory.OnLoanCopy();
 
-        // Act
-        Result<Loan> result = member.Borrow(
-            copy,
-            loanDate: DateTime.UtcNow,
-            loanDays: 14,
-            activeLoanBookIds: Array.Empty<BookId>());
+        Result<Loan> result = member.Borrow(copy, DateTime.UtcNow, 14, Array.Empty<BookId>());
 
-        // Assert
         result.IsFailure.Should().BeTrue();
         result.Error.Should().Be(BookCopyErrors.NotAvailable);
     }
@@ -76,19 +54,12 @@ public class MemberBorrowTests
     [Fact]
     public void Borrow_WhenRulesPass_ShouldCreateLoan_AndMarkCopyOnLoan()
     {
-        // Arrange
-        var member = DomainBuilder.ActiveMember();
-        var copy = DomainBuilder.AvailableCopy();
+        var member = DomainFactory.ActiveMember();
+        var copy = DomainFactory.AvailableCopy();
         var loanDate = DateTime.UtcNow;
 
-        // Act
-        Result<Loan> result = member.Borrow(
-            copy,
-            loanDate,
-            loanDays: 14,
-            activeLoanBookIds: Array.Empty<BookId>());
+        Result<Loan> result = member.Borrow(copy, loanDate, 14, Array.Empty<BookId>());
 
-        // Assert
         result.IsSuccess.Should().BeTrue();
         result.Error.Should().Be(Error.None);
 

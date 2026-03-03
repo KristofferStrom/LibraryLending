@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\LibraryLending.Domain\LibraryLending.Domain.csproj" />
+    <ProjectReference Include="..\LibraryLending.Testing\LibraryLending.Testing.csproj" />
   </ItemGroup>
 
   <ItemGroup>

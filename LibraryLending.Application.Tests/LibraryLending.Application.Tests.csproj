@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\LibraryLending.Application\LibraryLending.Application.csproj" />
+    <ProjectReference Include="..\LibraryLending.Testing\LibraryLending.Testing.csproj" />
   </ItemGroup>
 
   <ItemGroup>
