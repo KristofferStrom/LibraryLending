@@ -1,3 +1,4 @@
+using LibraryLending.Api.Abstractions;
 using LibraryLending.Application.DependencyInjection;
 using LibraryLending.Infrastructure.DependencyInjection;
 
@@ -7,7 +8,11 @@ builder.Services.AddOpenApi();
 
 builder.Services
     .AddApplication()
-    .AddInfrastructure(builder.Configuration);
+    .AddInfrastructure(builder.Configuration)
+    .AddEndpointsApiExplorer()
+    .AddEndpoints(typeof(Program).Assembly);
+//.AddSwaggerGen();
+
 
 var app = builder.Build();
 
