@@ -9,7 +9,3 @@ public class BorrowBookCopyErrors
     public static Error LendingPolicyMissing => new(ErrorType.NotFound, "Utlåningspolicy saknas.");
 
 }
-
-//public static Error MemberNumberIsRequired => new(ErrorType.Validation, "Medlemsnummer måste anges.");
-
-//public static Error BarcodeIsRequired => new(ErrorType.Validation, "Streckkod måste anges.");

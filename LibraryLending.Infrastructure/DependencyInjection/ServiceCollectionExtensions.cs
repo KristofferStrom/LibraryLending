@@ -4,11 +4,12 @@ using LibraryLending.Domain.Aggregates.Loans;
 using LibraryLending.Domain.Aggregates.Members;
 using LibraryLending.Domain.Shared.Abstractions;
 using LibraryLending.Infrastructure.Persistence.EfCore.Contexts;
+using LibraryLending.Infrastructure.Persistence.EfCore.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace LibraryLending.Infrastructure;
+namespace LibraryLending.Infrastructure.DependencyInjection;
 
 
 public static class ServiceCollectionExtensions
