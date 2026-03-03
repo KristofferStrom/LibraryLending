@@ -1,11 +1,27 @@
 # LibraryLending
 
-Bibliotekstjänst för utlåning och återlämning av fysiska bokexemplar.
+En liten bibliotekstjänst för **utlåning** och **återlämning** av fysiska bokexemplar.
 
-## Arkitektur
-Projektet utgår från DDD och Clean Architecture, organiserat med CQRS och Slice Architecture.
+Projektet är byggt för att visa **objektorienterad design**, tydlig **ansvarsfördelning** och ett testbart upplägg.
 
-## Use cases (MVP)
+## Fokus
+- Domänlogik med tydliga regler (invariants)
+- Use case-baserad struktur (CQRS/slices)
+- Testning på flera nivåer (domän, applikation, integration)
+
+## Use cases
 - Låna exemplar
 - Återlämna exemplar
-- Lista aktiva lån per medlem (read/query)
+
+## Kort om arkitekturen
+Inspirerad av **DDD** och **Clean Architecture**:
+- **Domain**: domänobjekt, value objects, regler
+- **Application**: use cases/handlers och gränssnitt
+- **Infrastructure**: persistence (t.ex. EF Core) och repository-implementationer
+- **API**: minimal API + Swagger
+
+## Teknik (översikt)
+- .NET / C#
+- Minimal API + Swagger
+- EF Core
+- xUnit (tester)
