@@ -1,5 +1,6 @@
 ﻿using LibraryLending.Api.Abstractions;
 using LibraryLending.Api.Features.Lending.BorrowBookCopy;
+using LibraryLending.Api.Features.Lending.ReturnBookCopy;
 
 namespace LibraryLending.Api.Features.Lending;
 
@@ -12,6 +13,6 @@ public sealed class LendingModule : IEndpoint
             .WithTags("Lending");
 
         BorrowBookCopyEndpoint.Map(group);
-        //ReturnBookCopyEndpoints.Map(group);
+        ReturnBookCopyEndpoint.Map(group);
     }
 }

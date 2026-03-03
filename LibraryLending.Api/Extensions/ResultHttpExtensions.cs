@@ -1,7 +1,7 @@
 ﻿using LibraryLending.SharedKernel.Results;
 using Microsoft.AspNetCore.Mvc;
 
-namespace LibraryLending.Api.Abstractions;
+namespace LibraryLending.Api.Extensions;
 
 
 public static class ResultHttpExtensions

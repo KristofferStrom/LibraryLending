@@ -1,4 +1,4 @@
-using LibraryLending.Api.Abstractions;
+using LibraryLending.Api.Extensions;
 using LibraryLending.Application.DependencyInjection;
 using LibraryLending.Infrastructure.DependencyInjection;
 

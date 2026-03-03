@@ -19,8 +19,4 @@
     <ProjectReference Include="..\LibraryLending.Infrastructure\LibraryLending.Infrastructure.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Features\Lending\ReturnBookCopy\" />
-  </ItemGroup>
-
 </Project>

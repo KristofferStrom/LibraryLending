@@ -1,4 +1,4 @@
-﻿using LibraryLending.Api.Abstractions;
+﻿using LibraryLending.Api.Extensions;
 using LibraryLending.Application.Core.Abstractions.Messaging;
 using LibraryLending.Application.Features.Lending.BorrowBookCopy;
 

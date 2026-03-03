@@ -1,6 +1,7 @@
-﻿using System.Reflection;
+﻿using LibraryLending.Api.Abstractions;
+using System.Reflection;
 
-namespace LibraryLending.Api.Abstractions;
+namespace LibraryLending.Api.Extensions;
 
 
 public static class EndpointRegistrationExtensions
